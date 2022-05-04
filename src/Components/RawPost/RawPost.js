@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import YoutubePlayer from 'react-youtube-player';
+import YouTube from 'react-youtube';
 import "./RawPost.css"
 import axios from "../../axios"
 import {imageUrl,API_KEY} from "../../constants/Constants"
@@ -23,7 +23,14 @@ function RawPost(props) {
              }
          })
      }
-     
+     const opts = {
+        height: '390',
+        width: '100%',
+        playerVars: {
+          // https://developers.google.com/youtube/player_parameters
+          autoplay: 1,
+        },
+      };
      
      return (
         <div className='row'>
@@ -34,20 +41,7 @@ function RawPost(props) {
                     <img onClick={()=>HandleMovie(obj.id)} className={props.isSmall?'smallPoster':'poster'} src={`${imageUrl+obj.backdrop_path}`} alt="poster" />
                 )}
             </div>
-           { urlId && <div  className="video-container" >
-                    <YoutubePlayer 
-    videoId={urlId.key}
-    playbackState='unstarted'
-    configuration={
-        {
-            showinfo: 0,
-            controls: 0,
-            autoplay:0
-            
-        }
-}
-/>   
-        </div> }
+              <YouTube videoId="2g811Eo7K8U" opts={opts} />
         </div>
     )
 }
