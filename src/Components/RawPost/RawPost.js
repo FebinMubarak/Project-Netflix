@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import YouTube from 'react-youtube';
+import ReactPlayer from 'react-player/lazy'
 import "./RawPost.css"
 import axios from "../../axios"
 import {imageUrl,API_KEY} from "../../constants/Constants"
@@ -15,22 +15,16 @@ function RawPost(props) {
      const HandleMovie = (id)=>{
          console.log(id)
          axios.get(`/movie/${id}/videos?api_key=${API_KEY}&language=en-US`).then(response=>{
+             
              if(response.data.results.length!==0){
-                    seturlId(response.data.results[0]);
+                    seturlId(response.data.results[0].key);
                     console.log(response.data)
              }else{
                  console.log("Empty array");
              }
          })
      }
-     const opts = {
-        height: '390',
-        width: '100%',
-        playerVars: {
-          // https://developers.google.com/youtube/player_parameters
-          autoplay: 1,
-        },
-      };
+    
      
      return (
         <div className='row'>
@@ -41,7 +35,9 @@ function RawPost(props) {
                     <img onClick={()=>HandleMovie(obj.id)} className={props.isSmall?'smallPoster':'poster'} src={`${imageUrl+obj.backdrop_path}`} alt="poster" />
                 )}
             </div>
-              <YouTube videoId="2g811Eo7K8U" opts={opts} />
+            
+            { urlId && <ReactPlayer  url={urlId.key} />}
+            
         </div>
     )
 }
