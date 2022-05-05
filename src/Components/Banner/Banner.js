@@ -4,11 +4,16 @@ import axios from '../../axios'
 import {API_KEY,imageUrl} from '../../constants/Constants'
 function Banner() {
   const [movie, setMovie] = useState()
-  useEffect(()=>{
-     axios.get(`/trending/all/week?api_key=${API_KEY}&language=en-US`).then((response)=>{
-       console.log(response.data.results)
-       setMovie(response.data.results[0])
-     })
+  useEffect(()=>{ async function fetchdata(){
+      axios.get(`/trending/all/week?api_key=${API_KEY}&language=en-US`).then((response)=>{
+       setMovie(response.data.results[Math.floor(Math.random()*response.data.results.length-1)
+      ])
+       return response
+    }
+       
+     )}
+     fetchdata()
+     
   },[])
   return (
     
@@ -20,6 +25,7 @@ function Banner() {
              <h1 className='title'>{movie?movie.title:""}</h1>
              <div className="banner-buttons">
                  <button className="button">Play</button>
+                 
                  <button className="button">My list</button>
              </div>
              <h1 className='description'>{movie?movie.overview:""}</h1>

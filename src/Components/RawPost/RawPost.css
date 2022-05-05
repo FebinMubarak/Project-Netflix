@@ -14,16 +14,30 @@
 .poster{
     max-height: 250px;
     margin-right: 10px;
+    cursor: pointer;
+    
 }
 .smallPoster{
-    max-height: 150px;
+    max-height: 200px;
     margin-right: 10px;
+    cursor: pointer;
+    
+
+}
+.smallPoster:hover{
+    
+    transform: scale(1.3);
+    transform-style: preserve-3d;
+    
+
+
+}
+.poster:hover{
+    transform: scale(1.2);
+   
+    box-shadow: rgba(51, 51, 51, 0.5);
+    
+
+    
 }
 
-
-.video-container { 
-    
-    width: 100%;
-    height: 500px;
-    
-    }
