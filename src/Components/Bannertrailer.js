@@ -1,1 +1,0 @@
-import "./Bannertrailer.css"
